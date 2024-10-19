@@ -20,6 +20,7 @@ using StayCation.API.VerticalSlicing.Common.DTOs;
 using Autofac.Core;
 using Hangfire;
 using StayCation.API.VerticalSlicing.Features.Product.LogLowStock.LogStockOrchastratorCommand;
+using StayCation.API.VerticalSlicing.Features.Transaction;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -134,12 +135,15 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseHangfireDashboard("/hangfire");
 RecurringJob.AddOrUpdate<LogLowStockService>(
-            //"low-stock-job",
-            //service => service.LogLowStock(),
-            //Cron.Daily);
+          
             recurringJobId: "log-low-stock",
     methodCall: x => x.LogLowStock(),
     cronExpression: Cron.Daily);
+RecurringJob.AddOrUpdate<BackgroundTransactionService>(
+          
+            recurringJobId: "ArchivesTransactions",
+    methodCall: x => x.ArchivesTransactions(),
+    cronExpression: Cron.Yearly);
 app.UseAuthorization();
 
 app.MapControllers();

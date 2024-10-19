@@ -7,6 +7,7 @@ using StayCation.API.VerticalSlicing.Data;
 using StayCation.API.VerticalSlicing.Data.Data;
 using StayCation.API.VerticalSlicing.Data.Repositories;
 using StayCation.API.VerticalSlicing.Features.Product.LogLowStock.LogStockOrchastratorCommand;
+using StayCation.API.VerticalSlicing.Features.Transaction;
 using System.Diagnostics;
 
 namespace StayCation.API.VerticalSlicing.Common
@@ -46,6 +47,7 @@ namespace StayCation.API.VerticalSlicing.Common
 
             builder.RegisterType<UserState>().InstancePerLifetimeScope();
             builder.RegisterType<LogLowStockService>().SingleInstance();
+            builder.RegisterType<BackgroundTransactionService>().SingleInstance();
 
             builder.RegisterType<ControllereParameters>().InstancePerLifetimeScope();
 

@@ -2,21 +2,21 @@
 using MediatR;
 using Serilog;
 using StayCation.API.VerticalSlicing.Features.Product.CheckLowStock.Queries;
+using StayCation.API.VerticalSlicing.Features.Transaction.GetTransactionsYear.Queries;
 
 namespace StayCation.API.VerticalSlicing.Features.Product.LogLowStock.LogStockOrchastratorCommand
 {
     public class LogLowStockService
     {
         IServiceProvider serviceProvider;
-        //IMediator mediator;
-        public LogLowStockService( // IMediator mediator, 
+        public LogLowStockService( 
             IServiceProvider serviceProvider)
         {
-            //this.mediator = mediator;
-            RecurringJob.AddOrUpdate<LogLowStockService>(
-            "low-stock-job",
-            service => service.LogLowStock(),
-            Cron.Daily);
+           
+            //RecurringJob.AddOrUpdate<LogLowStockService>(
+            //"low-stock-job",
+            //service => service.LogLowStock(),
+            //Cron.Daily);
             this.serviceProvider = serviceProvider;
         }
 
@@ -35,6 +35,16 @@ namespace StayCation.API.VerticalSlicing.Features.Product.LogLowStock.LogStockOr
                         Log.Information($" you have to restock this product which has Id  {lowStock.Id.ToString()}");
                     }
                 }
+            }
+        }
+
+        public async Task ArchivesTransactions()
+        {
+            using (var scope = serviceProvider.CreateScope())
+            {
+                var mediator = scope.ServiceProvider.GetRequiredService<IMediator>();
+
+                var transactions = await mediator.Send(new GetTransactionsYearlyQuery());
             }
         }
 

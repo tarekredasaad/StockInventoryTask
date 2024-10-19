@@ -15,10 +15,7 @@ namespace StayCation.API.VerticalSlicing.Features.Product.CheckLowStock.Queries
 
         public override async Task<List<Data.Models.Product>> Handle(CheckLowStockQuery request, CancellationToken cancellationToken)
         {
-            //if (request == null)
-            //{
-            //    return ResultDTO.Failure("Invalid RecipeID!");
-            //}
+            
 
             var Stock =  _repository.GetAll();
             var result = Stock.Where(s => s.LowStockThreshold > s.Quantity).ToList();
