@@ -21,7 +21,6 @@ namespace StayCation.API.VerticalSlicing.Features.Recipe.GetRecipeById.Queries
             }
 
             var recipe =  _repository.GetAll();
-            var mappedRecipe = recipe.MapOne<RecipeReturnDTO>();
             return ResultDTO.Success(recipe.ToList());
         }
     }

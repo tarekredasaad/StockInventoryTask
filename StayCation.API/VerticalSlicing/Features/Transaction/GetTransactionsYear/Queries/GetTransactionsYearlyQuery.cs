@@ -8,7 +8,7 @@ namespace StayCation.API.VerticalSlicing.Features.Transaction.GetTransactionsYea
 {
     public record GetTransactionsYearlyQuery() : IRequest<List<Transactions>>;
 
-    public class GetTransactionsYearlyQueryHandler : BaseRequestHandler<Transactions, GetTransactionsYearlyQuery, List<Transactions>
+    public class GetTransactionsYearlyQueryHandler : BaseRequestHandler<Transactions, GetTransactionsYearlyQuery, List<Transactions>>
     {
         public GetTransactionsYearlyQueryHandler(RequestParameters<Transactions> requestParameters) : base(requestParameters)
         {

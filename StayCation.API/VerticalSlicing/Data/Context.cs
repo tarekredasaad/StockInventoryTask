@@ -30,7 +30,7 @@ namespace StayCation.API.VerticalSlicing.Data.Data
         //public DbSet<Category> Categories { get; set; }
         public DbSet<Product> Products { get; set; }
         //public DbSet<Tran> Trans { get; set; }
-        public DbSet<Transactions> Transactions { get; set; }
+        //public DbSet<Transactions> Transactions { get; set; }
         public DbSet<WareHouse> WareHouses { get; set; }
 
         //public DbSet<Recipe> Recipes { get; set; }
